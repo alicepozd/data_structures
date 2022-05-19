@@ -80,6 +80,8 @@ namespace lab618
         virtual ~CHash()
         {
             clear();
+	    delete[] m_pTable;
+            m_pTable = nullptr;
         }
 
         /**
@@ -161,9 +163,10 @@ namespace lab618
         */
         void clear()
         {
+	    for (int i = 0; i < m_tableSize; ++i) {
+                m_pTable[i] = nullptr;
+            }
             m_Memory.clear();
-            delete m_pTable;
-            m_pTable = nullptr;
         }
     private:
         /**

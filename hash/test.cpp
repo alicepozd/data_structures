@@ -79,11 +79,24 @@ void TestHashFunction() {
 
     hash.update(&my_array[0]);
 
-    for (int i = 0; i < ELEMENTS_COUNT; ++i) {
-        hash.remove(my_array[i]);
-    }
+    hash.clear();
 
     delete[] my_array;
+
+    TestStruct* my_array_s = new TestStruct[ELEMENTS_COUNT];
+
+    for (int i = 0; i < ELEMENTS_COUNT; ++i) {
+        generate(&my_array_s[i]);
+        hash.add(&my_array_s[i]);
+    }
+
+    hash.update(&my_array_s[0]);
+
+    for (int i = 0; i < ELEMENTS_COUNT; ++i) {
+        hash.remove(my_array_s[i]);
+    }
+
+    delete[] my_array_s;
 }
 
 int main() {
